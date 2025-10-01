@@ -40,35 +40,40 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.btnImageSubtraction = new System.Windows.Forms.Button();
+            this.chkUseConvolution = new System.Windows.Forms.CheckBox();
+            this.cmbConvolutionType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxOriginal
             // 
-            this.pictureBoxOriginal.Location = new System.Drawing.Point(12, 12);
-            this.pictureBoxOriginal.Name = "pictureBoxOriginal";
-            this.pictureBoxOriginal.Size = new System.Drawing.Size(400, 400);
-            this.pictureBoxOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxOriginal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxOriginal.Location = new System.Drawing.Point(9, 10);
+            this.pictureBoxOriginal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxOriginal.Name = "pictureBoxOriginal";
+            this.pictureBoxOriginal.Size = new System.Drawing.Size(300, 325);
+            this.pictureBoxOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxOriginal.TabIndex = 0;
             this.pictureBoxOriginal.TabStop = false;
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(422, 12);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(400, 400);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.Location = new System.Drawing.Point(316, 10);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(300, 325);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(840, 12);
+            this.btnLoad.Location = new System.Drawing.Point(630, 10);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(100, 30);
+            this.btnLoad.Size = new System.Drawing.Size(75, 24);
             this.btnLoad.TabIndex = 2;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -76,9 +81,10 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(840, 52);
+            this.btnCopy.Location = new System.Drawing.Point(630, 42);
+            this.btnCopy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(100, 30);
+            this.btnCopy.Size = new System.Drawing.Size(75, 24);
             this.btnCopy.TabIndex = 3;
             this.btnCopy.Text = "Copy";
             this.btnCopy.UseVisualStyleBackColor = true;
@@ -86,9 +92,10 @@
             // 
             // btnGreyscale
             // 
-            this.btnGreyscale.Location = new System.Drawing.Point(840, 92);
+            this.btnGreyscale.Location = new System.Drawing.Point(630, 75);
+            this.btnGreyscale.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnGreyscale.Name = "btnGreyscale";
-            this.btnGreyscale.Size = new System.Drawing.Size(100, 30);
+            this.btnGreyscale.Size = new System.Drawing.Size(75, 24);
             this.btnGreyscale.TabIndex = 4;
             this.btnGreyscale.Text = "Greyscale";
             this.btnGreyscale.UseVisualStyleBackColor = true;
@@ -96,9 +103,10 @@
             // 
             // btnInvert
             // 
-            this.btnInvert.Location = new System.Drawing.Point(840, 132);
+            this.btnInvert.Location = new System.Drawing.Point(630, 107);
+            this.btnInvert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnInvert.Name = "btnInvert";
-            this.btnInvert.Size = new System.Drawing.Size(100, 30);
+            this.btnInvert.Size = new System.Drawing.Size(75, 24);
             this.btnInvert.TabIndex = 5;
             this.btnInvert.Text = "Invert";
             this.btnInvert.UseVisualStyleBackColor = true;
@@ -106,9 +114,10 @@
             // 
             // btnHistogram
             // 
-            this.btnHistogram.Location = new System.Drawing.Point(840, 172);
+            this.btnHistogram.Location = new System.Drawing.Point(630, 140);
+            this.btnHistogram.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnHistogram.Name = "btnHistogram";
-            this.btnHistogram.Size = new System.Drawing.Size(100, 30);
+            this.btnHistogram.Size = new System.Drawing.Size(75, 24);
             this.btnHistogram.TabIndex = 6;
             this.btnHistogram.Text = "Histogram";
             this.btnHistogram.UseVisualStyleBackColor = true;
@@ -116,9 +125,10 @@
             // 
             // btnSepia
             // 
-            this.btnSepia.Location = new System.Drawing.Point(840, 212);
+            this.btnSepia.Location = new System.Drawing.Point(630, 172);
+            this.btnSepia.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSepia.Name = "btnSepia";
-            this.btnSepia.Size = new System.Drawing.Size(100, 30);
+            this.btnSepia.Size = new System.Drawing.Size(75, 24);
             this.btnSepia.TabIndex = 7;
             this.btnSepia.Text = "Sepia";
             this.btnSepia.UseVisualStyleBackColor = true;
@@ -126,9 +136,10 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(840, 252);
+            this.btnSave.Location = new System.Drawing.Point(630, 205);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 30);
+            this.btnSave.Size = new System.Drawing.Size(75, 24);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -136,19 +147,49 @@
             // 
             // btnImageSubtraction
             // 
-            this.btnImageSubtraction.Location = new System.Drawing.Point(840, 292);
+            this.btnImageSubtraction.Location = new System.Drawing.Point(630, 237);
+            this.btnImageSubtraction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnImageSubtraction.Name = "btnImageSubtraction";
-            this.btnImageSubtraction.Size = new System.Drawing.Size(120, 30);
+            this.btnImageSubtraction.Size = new System.Drawing.Size(90, 24);
             this.btnImageSubtraction.TabIndex = 9;
             this.btnImageSubtraction.Text = "Image Subtraction";
             this.btnImageSubtraction.UseVisualStyleBackColor = true;
             this.btnImageSubtraction.Click += new System.EventHandler(this.btnImageSubtraction_Click);
             // 
+            // chkUseConvolution
+            // 
+            this.chkUseConvolution.AutoSize = true;
+            this.chkUseConvolution.Location = new System.Drawing.Point(620, 278);
+            this.chkUseConvolution.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkUseConvolution.Name = "chkUseConvolution";
+            this.chkUseConvolution.Size = new System.Drawing.Size(135, 17);
+            this.chkUseConvolution.TabIndex = 10;
+            this.chkUseConvolution.Text = "Use Convolution Matrix";
+            this.chkUseConvolution.UseVisualStyleBackColor = true;
+            // 
+            // cmbConvolutionType
+            // 
+            this.cmbConvolutionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConvolutionType.FormattingEnabled = true;
+            this.cmbConvolutionType.Items.AddRange(new object[] {
+            "None",
+            "Smooth",
+            "Gaussian Blur",
+            "Sharpen",
+            "Edge Detect"});
+            this.cmbConvolutionType.Location = new System.Drawing.Point(628, 299);
+            this.cmbConvolutionType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbConvolutionType.Name = "cmbConvolutionType";
+            this.cmbConvolutionType.Size = new System.Drawing.Size(92, 21);
+            this.cmbConvolutionType.TabIndex = 11;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 430);
+            this.ClientSize = new System.Drawing.Size(775, 351);
+            this.Controls.Add(this.cmbConvolutionType);
+            this.Controls.Add(this.chkUseConvolution);
             this.Controls.Add(this.btnImageSubtraction);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnSepia);
@@ -159,11 +200,13 @@
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.pictureBoxOriginal);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Digital Image Processor";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -181,6 +224,8 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button btnImageSubtraction;
+        private System.Windows.Forms.CheckBox chkUseConvolution;
+        private System.Windows.Forms.ComboBox cmbConvolutionType;
     }
 }
 

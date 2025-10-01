@@ -12,15 +12,44 @@ namespace ImageProcessor
         private Bitmap resultImage;
         private Device webcamDevice;
         private int webcamTarget = 0; // 0: none, 1: first, 2: background
+        private bool useConvolution = false;
+        private CheckBox chkUseConvolution;
+        private ComboBox cmbConvolutionType;
 
         public ImageSubtractionForm()
         {
             InitializeComponent();
+            InitializeConvolutionControls();
+        }
+
+        private void InitializeConvolutionControls()
+        {
+            // Add convolution toggle checkbox
+            chkUseConvolution = new CheckBox
+            {
+                Text = "Use Convolution Matrix",
+                Location = new Point(644, 360),
+                AutoSize = true
+            };
+            Controls.Add(chkUseConvolution);
+
+            // Add convolution type combo box
+            cmbConvolutionType = new ComboBox
+            {
+                Location = new Point(804, 360),
+                Size = new Size(140, 30),
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            cmbConvolutionType.Items.AddRange(new string[] { 
+                "None", "Smooth", "Gaussian Blur", "Sharpen", "Edge Detect" 
+            });
+            cmbConvolutionType.SelectedIndex = 0;
+            Controls.Add(cmbConvolutionType);
         }
 
         private void btnLoadFirst_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 firstImage = new Bitmap(openFileDialog.FileName);
                 pictureBoxFirst.Image = firstImage;
@@ -93,28 +122,87 @@ namespace ImageProcessor
             {
                 int width = Math.Min(firstImage.Width, backgroundImage.Width);
                 int height = Math.Min(firstImage.Height, backgroundImage.Height);
-                Color mygreen = Color.FromArgb(0, 255, 0);
-                int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
-                int threshold = 20;
                 Bitmap result = new Bitmap(width, height);
-                for (int y = 0; y < height; y++)
+
+                if (useConvolution)
                 {
-                    for (int x = 0; x < width; x++)
+                    // First, perform the selected convolution on both images
+                    Bitmap processedFirst = (Bitmap)firstImage.Clone();
+                    Bitmap processedBackground = (Bitmap)backgroundImage.Clone();
+
+                    ConvMatrix matrix = null;
+                    switch (cmbConvolutionType.SelectedItem.ToString())
                     {
-                        Color c1 = firstImage.GetPixel(x, y);
-                        Color c2 = backgroundImage.GetPixel(x, y);
-                        int grey = (c1.R + c1.G + c1.B) / 3;
-                        int sub = Math.Abs(grey - greygreen);
-                        if (sub > threshold)
+                        case "Smooth":
+                            matrix = ConvMatrix.Smooth(2);
+                            break;
+                        case "Gaussian Blur":
+                            matrix = ConvMatrix.GaussianBlur();
+                            break;
+                        case "Sharpen":
+                            matrix = ConvMatrix.Sharpen();
+                            break;
+                        case "Edge Detect":
+                            matrix = ConvMatrix.EdgeDetect();
+                            break;
+                    }
+
+                    if (matrix != null)
+                    {
+                        ConvMatrix.Conv3x3(processedFirst, matrix);
+                        ConvMatrix.Conv3x3(processedBackground, matrix);
+                    }
+
+                    // Then perform the subtraction
+                    for (int y = 0; y < height; y++)
+                    {
+                        for (int x = 0; x < width; x++)
                         {
-                            result.SetPixel(x, y, c1);
+                            Color c1 = processedFirst.GetPixel(x, y);
+                            Color c2 = processedBackground.GetPixel(x, y);
+                            
+                            // Check for green screen
+                            if (c1.G > 150 && c1.R < 120 && c1.B < 120)
+                            {
+                                result.SetPixel(x, y, c2);
+                            }
+                            else
+                            {
+                                result.SetPixel(x, y, c1);
+                            }
                         }
-                        else
+                    }
+
+                    processedFirst.Dispose();
+                    processedBackground.Dispose();
+                }
+                else
+                {
+                    // Original pixel-by-pixel processing
+                    Color mygreen = Color.FromArgb(0, 255, 0);
+                    int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
+                    int threshold = 20;
+
+                    for (int y = 0; y < height; y++)
+                    {
+                        for (int x = 0; x < width; x++)
                         {
-                            result.SetPixel(x, y, c2);
+                            Color c1 = firstImage.GetPixel(x, y);
+                            Color c2 = backgroundImage.GetPixel(x, y);
+                            int grey = (c1.R + c1.G + c1.B) / 3;
+                            int sub = Math.Abs(grey - greygreen);
+                            if (sub > threshold)
+                            {
+                                result.SetPixel(x, y, c1);
+                            }
+                            else
+                            {
+                                result.SetPixel(x, y, c2);
+                            }
                         }
                     }
                 }
+
                 resultImage = result;
                 pictureBoxResult.Image = resultImage;
             }
